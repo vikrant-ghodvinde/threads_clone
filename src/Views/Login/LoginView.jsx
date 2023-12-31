@@ -47,9 +47,9 @@ const LoginView = () => {
         <form className="grid  gap-6" onSubmit={handleLogin}>
           <div className="relative">
             <input
-              type="email"
+              type="text"
               value={values.email}
-              placeholder="john@gamil.com"
+              placeholder="Username or Email"
               className="w-full h-11 px-4 bg-transparent border border-gray-600 outline-none rounded-md placeholder:text-gray-600"
               onChange={(e) => setValues({ ...values, email: e.target.value })}
               required
@@ -59,7 +59,7 @@ const LoginView = () => {
             <input
               type="password"
               value={values.password}
-              placeholder="******"
+              placeholder="Password"
               autoComplete="false"
               className="w-full h-11 px-4 bg-transparent border border-gray-600 outline-none rounded-md placeholder:text-gray-600"
               onChange={(e) =>

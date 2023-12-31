@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import CreateThread from "../CreateThread/CreateThread";
 import { setLogout } from "@/States/reducers/authReducer";
 import { useDispatch, useSelector } from "react-redux";
 
 const Navigation = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   return (
-    <div className="sticky top-0 left-0 w-full max-w-screen-xl mx-auto py-1 z-[999]">
+    <div className="sticky top-0 left-0 w-full max-w-screen-xl mx-auto py-1 bg-nav-bg backdrop-blur-xl z-[999]">
       <div className="flex items-center justify-between">
         <Link to="/" className="block">
           <img
@@ -21,7 +22,9 @@ const Navigation = () => {
           <li>
             <Link
               to="/"
-              className="block py-5 px-8 rounded-md text-gray-600 hover:text-white hover:bg-dark transition-all duration-300"
+              className={`block py-5 px-8 rounded-md hover:text-white hover:bg-dark transition-all duration-300 ${
+                location.pathname === "/" ? "text-white" : "text-gray-600"
+              }`}
             >
               <FeatherIcon icon="home" width={24} height={24} />
             </Link>
@@ -29,7 +32,9 @@ const Navigation = () => {
           <li>
             <Link
               to="/search"
-              className="block py-5 px-8 rounded-md text-gray-600 hover:text-white hover:bg-dark transition-all duration-300"
+              className={`block py-5 px-8 rounded-md hover:text-white hover:bg-dark transition-all duration-300 ${
+                location.pathname === "/search" ? "text-white" : "text-gray-600"
+              }`}
             >
               <FeatherIcon icon="search" width={24} height={24} />
             </Link>
@@ -45,7 +50,9 @@ const Navigation = () => {
           <li>
             <Link
               to="/activity"
-              className="block py-5 px-8 rounded-md text-gray-600 hover:text-white hover:bg-dark transition-all duration-300"
+              className={`block py-5 px-8 rounded-md hover:text-white hover:bg-dark transition-all duration-300 ${
+                location.pathname === "/activity" ? "text-white" : "text-gray-600"
+              }`}
             >
               <FeatherIcon icon="heart" width={24} height={24} />
             </Link>
@@ -53,7 +60,9 @@ const Navigation = () => {
           <li>
             <Link
               to="/friends"
-              className="block py-5 px-8 rounded-md text-gray-600 hover:text-white hover:bg-dark transition-all duration-300"
+              className={`block py-5 px-8 rounded-md hover:text-white hover:bg-dark transition-all duration-300 ${
+                location.pathname === "/friends" ? "text-white" : "text-gray-600"
+              }`}
             >
               <FeatherIcon icon="users" width={24} height={24} />
             </Link>
@@ -68,7 +77,7 @@ const Navigation = () => {
             <img
               src={`http://localhost:5000/${user.userImage}`}
               alt=""
-              className="w-full rounded-full"
+              className="w-full h-full object-cover rounded-full"
             />
           </div>
           <ul

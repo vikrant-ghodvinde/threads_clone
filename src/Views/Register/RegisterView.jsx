@@ -26,12 +26,9 @@ const RegisterView = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    console.log(values.userImage);
     axios
-      .post("http://localhost:5000/user/create", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post("http://localhost:5000/user/create", formData)
       .then((res) => {
         console.log(res);
         navigate("/");
@@ -63,7 +60,7 @@ const RegisterView = () => {
             <input
               type="text"
               value={values.firstName}
-              placeholder="john"
+              placeholder="First Name"
               className="w-full h-11 px-4 bg-transparent border border-gray-600 outline-none rounded-md placeholder:text-gray-600"
               onChange={(e) =>
                 setValues({ ...values, firstName: e.target.value })
@@ -75,7 +72,7 @@ const RegisterView = () => {
             <input
               type="text"
               value={values.lastName}
-              placeholder="doe"
+              placeholder="Last Name"
               className="w-full h-11 px-4 bg-transparent border border-gray-600 outline-none rounded-md placeholder:text-gray-600"
               onChange={(e) =>
                 setValues({ ...values, lastName: e.target.value })
@@ -87,7 +84,7 @@ const RegisterView = () => {
             <input
               type="text"
               value={values.userName}
-              placeholder="john123"
+              placeholder="Username"
               className="w-full h-11 px-4 bg-transparent border border-gray-600 outline-none rounded-md placeholder:text-gray-600"
               onChange={(e) =>
                 setValues({ ...values, userName: e.target.value })
@@ -99,7 +96,7 @@ const RegisterView = () => {
             <input
               type="email"
               value={values.email}
-              placeholder="john@gamil.com"
+              placeholder="Email"
               className="w-full h-11 px-4 bg-transparent border border-gray-600 outline-none rounded-md placeholder:text-gray-600"
               onChange={(e) => setValues({ ...values, email: e.target.value })}
               required
@@ -109,7 +106,7 @@ const RegisterView = () => {
             <input
               type="number"
               value={values.phone}
-              placeholder="0123456789"
+              placeholder="Phone"
               autoComplete="false"
               className="w-full h-11 px-4 bg-transparent border border-gray-600 outline-none rounded-md placeholder:text-gray-600 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               onChange={(e) => setValues({ ...values, phone: e.target.value })}
@@ -120,7 +117,7 @@ const RegisterView = () => {
             <input
               type="password"
               value={values.password}
-              placeholder="******"
+              placeholder="Password"
               autoComplete="false"
               className="w-full h-11 px-4 bg-transparent border border-gray-600 outline-none rounded-md placeholder:text-gray-600"
               onChange={(e) =>

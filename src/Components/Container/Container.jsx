@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const Container = ({ children }) => {
   return (
-    <div className='relative w-full max-w-screen-xl mx-auto py-12'>{children}</div>
+    <div className='relative w-full max-w-screen-xl mx-auto py-5'>{children}</div>
   )
 }
 

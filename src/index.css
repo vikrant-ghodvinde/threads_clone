@@ -34,3 +34,34 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.mui-textarea {
+  position: relative;
+  width: 100%;
+}
+
+.mui-textarea .MuiInputBase-root {
+  position: relative;
+  padding: 0;
+}
+
+.mui-textarea .MuiInputBase-root textarea {
+  height: 20px;
+  color: #fff;
+  font-size: 14px;
+  padding: 0;
+  outline: 0 !important;
+  font-weight: 400;
+}
+
+.mui-textarea .MuiInputBase-root textarea::placeholder {
+  color: rgb(75 85 99);
+}
+
+.css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root:hover
+  .MuiOutlinedInput-notchedOutline,
+.css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline,
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border: 0 !important;
+}
