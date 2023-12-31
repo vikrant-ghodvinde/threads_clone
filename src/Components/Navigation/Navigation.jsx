@@ -52,7 +52,7 @@ const Navigation = () => {
           </li>
           <li>
             <Link
-              to="/friend"
+              to="/friends"
               className="block py-5 px-8 rounded-md text-gray-600 hover:text-white hover:bg-dark transition-all duration-300"
             >
               <FeatherIcon icon="users" width={24} height={24} />
