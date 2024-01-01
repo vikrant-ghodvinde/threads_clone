@@ -1,7 +1,22 @@
+import axios from "axios";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 const PostCard = ({ post }) => {
+  const userId = useSelector((state) => state.user.id);
+  const token = useSelector((state) => state.token);
+  const handlePostLike = (postId) => {
+    const requestData = { userId };
+    axios
+      .patch(`http://localhost:5000/post/${postId}/like`, requestData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => console.log(error.message));
+  };
   return (
     <div className="relative w-full border-t border-gray-700 py-4">
       <div className="relative w-full flex flex-col gap-y-4">
@@ -37,6 +52,7 @@ const PostCard = ({ post }) => {
                 <button
                   type="button"
                   className="relative inline-flex items-center justify-center rounded-full w-8 min-w-8 h-8 bg-transparent hover:bg-dark transition-all duration-300"
+                  onClick={() => handlePostLike(post.id)}
                 >
                   <FeatherIcon icon="heart" width={18} height={18} />
                 </button>
@@ -62,7 +78,7 @@ const PostCard = ({ post }) => {
           <ul className="relative flex gap-x-5">
             <li className="relative text-xs text-gray-600">72 replies</li>
             <li className="relative text-xs text-gray-600 before:content-[''] before:absolute before:left-[-10px] before:top-[50%] before:translate-y-[-50%] before:w-0.5 before:h-0.5 before:rounded-full before:bg-gray-600">
-              120 likes
+              {post.likes} {post.likes <= 1 ? "like" : "likes"}
             </li>
           </ul>
         </div>
@@ -73,10 +89,12 @@ const PostCard = ({ post }) => {
 
 PostCard.propTypes = {
   post: PropTypes.shape({
+    id: PropTypes.number,
     userName: PropTypes.string,
     userImage: PropTypes.string,
     feedText: PropTypes.string,
     feedImage: PropTypes.string,
+    likes: PropTypes.number,
   }).isRequired,
 };
 
