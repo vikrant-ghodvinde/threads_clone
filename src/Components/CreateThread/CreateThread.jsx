@@ -1,11 +1,13 @@
+import { setPosts } from "@/States/reducers/authReducer";
 import { FileInputButton, Avatar } from "@files-ui/react";
 import { TextField } from "@mui/material";
 import axios from "axios";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreateThread = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const [feed, setFeed] = useState({
@@ -27,6 +29,7 @@ const CreateThread = () => {
       })
       .then((res) => {
         console.log(res);
+        dispatch(setPosts({ posts: res.data }));
         document.getElementById("my_modal_2").close();
         setFeed({
           feedText: "",
@@ -44,7 +47,7 @@ const CreateThread = () => {
             <img
               src={`http://localhost:5000/${user.userImage}`}
               alt=""
-              className="w-full h-full rounded-full"
+              className="w-full h-full rounded-full object-cover"
             />
           </div>
           <div className="w-full">

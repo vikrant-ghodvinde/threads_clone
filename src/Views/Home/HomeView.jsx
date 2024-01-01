@@ -1,25 +1,31 @@
 import Container from "@/Components/Container/Container";
 import CreateThread from "@/Components/CreateThread/CreateThread";
 import PostCard from "@/Components/PostCard/PostCard";
+import { setPosts } from "@/States/reducers/authReducer";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const HomeView = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  const [posts, setPosts] = useState([]);
+  const posts = useSelector((state) => state.posts);
   useEffect(() => {
     axios
       .get("http://localhost:5000/post/getall", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(res.data.posts);
-        setPosts(res.data.posts);
+        console.log(res.data);
+        dispatch(
+          setPosts({
+            posts: res.data,
+          })
+        );
       })
       .catch((error) => console.log(error.message));
-  }, []);
+  }, [token, dispatch]);
   return (
     <Container>
       <div className="relative max-w-lg mx-auto">
@@ -36,7 +42,7 @@ const HomeView = () => {
           </div>
           Start a thread...
         </div>
-        {posts.map((post) => (
+        {posts.posts?.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}
       </div>
